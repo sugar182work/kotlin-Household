@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">自分用家計簿</string>
+    <string name="save">保存する</string>
+    <string name="pay_type">項目</string>
+    <string name="pay_value">支出額</string>
+    <string name="pay_date">日付</string>
+    <string name="open_details">日付選択</string>
+    <string name="date_placeholder">日付を設定</string>
+    <string name="no_date">No Data</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="file_name">data.txt</string>
+    <string name="test">test</string>
+</resources>
