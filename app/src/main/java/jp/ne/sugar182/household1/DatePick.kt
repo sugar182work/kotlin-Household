@@ -25,7 +25,7 @@ class DatePick : DialogFragment(), DatePickerDialog.OnDateSetListener {
                 day)
     }
 
-    // TODO Main側に実装しているが、abstする必要ありなので空メソッドを記載
+    // TODO Main側に実装しているが、ここにも宣言する必要ありなので空メソッドを記載
     override fun onDateSet(view: android.widget.DatePicker, year: Int,
                            monthOfYear: Int, dayOfMonth: Int) {
     }
