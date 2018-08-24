@@ -12,7 +12,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
-    var innerStorage: InnerStorage? = null
+    var innerStorage: InnerStorage = InnerStorage()
 
 
     override fun onCreate(savedInstanceState: Bundle?)  {
@@ -38,13 +38,14 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
         buttonSave.setOnClickListener {
             innerStorage = InnerStorage()
-            innerStorage!!.saveFile(filename, getString(R.string.test))
+            innerStorage.saveFile(filename, getString(R.string.test), applicationContext)
         }
     }
 
     /**
      * 起動時に日付をセットする。
      * */
+    // ここに実装するのはちょっと納得がいっていない
     override fun onDateSet(view: DatePicker, year: Int, month: Int, date: Int ) {
         val str = String.format(Locale.JAPAN, "%d/%d/%d", year, month+1, date)
         textViewDate.text = str;
