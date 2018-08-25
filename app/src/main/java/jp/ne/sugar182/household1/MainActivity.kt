@@ -12,7 +12,7 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
-    var innerStorage: InnerStorage = InnerStorage()
+    //var innerStorage: InnerStorage = InnerStorage()
 
 
     override fun onCreate(savedInstanceState: Bundle?)  {
@@ -37,8 +37,12 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         val saveButton = findViewById<Button>(R.id.buttonSave);
 
         buttonSave.setOnClickListener {
+            /*
             innerStorage = InnerStorage()
             innerStorage.saveFile(filename, getString(R.string.test), applicationContext)
+
+            innerStorage.readFile(filename,applicationContext)
+            */
         }
     }
 

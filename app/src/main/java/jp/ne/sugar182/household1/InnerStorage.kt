@@ -1,16 +1,22 @@
 package jp.ne.sugar182.household1
 
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.util.Log
-import java.io.File
-import java.io.FileWriter
 import java.io.IOException
-import java.io.OutputStreamWriter
 
 class InnerStorage {
+    var fileName = ""
+    var context: Context
 
-    fun saveFile(fileName: String, saveData: String, context: Context ) {
-        // 全然動かない記述
+    constructor(fileName: String, context: Context) {
+        this.fileName = fileName
+        this.context = context
+    }
+
+    // 内部ストレージへの書き込み
+    fun saveFile(saveData: String) {
+        // 全然動かない記述 おそらくパスを指定する必要あり。/data/data/hogehoge? Contextから取得
         // ファイルの書き込み
         /*
         val writeFile = File(fileName)
@@ -18,12 +24,32 @@ class InnerStorage {
         */
 
         // java風に書いてみる
-        val file = File(context.filesDir, fileName)
         try {
-            val writer : OutputStreamWriter = file.writer()
-            writer.write(saveData)
+            val fileOutputStream = context.openFileOutput(fileName, MODE_PRIVATE)
+            fileOutputStream.write(saveData.toByteArray())
+            fileOutputStream.close()
         } catch (e: IOException) {
             Log.d("IOException", e.stackTrace.toString())
         }
     }
+    // 内部ストレージからの読み込み contextを使用してみる
+    fun readFile(): ArrayList<String> {
+        var datas = arrayListOf<String>()
+
+        try {
+
+            val fileInputStream = context.openFileInput(fileName)
+            val reader = fileInputStream.bufferedReader()
+            for (lineBuffer in reader.readLines()) {
+                Log.d("readLine:", lineBuffer)
+                datas.add(lineBuffer)
+            }
+            reader.close()
+            fileInputStream.close()
+        } catch (e: IOException) {
+            Log.d("IOException", e.stackTrace.toString())
+        }
+        return datas
+    }
+
 }
