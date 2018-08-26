@@ -42,16 +42,14 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         }
     }
 
-    /**
-     * 起動時に日付をセットする。
-     * */
-    // ここに実装するのはちょっと納得がいっていない
+    // TODO ここに実装するのはちょっと納得がいっていない　javaではごまかせた気がするので再検証
     override fun onDateSet(view: DatePicker, year: Int, month: Int, date: Int ) {
         val str = String.format(Locale.JAPAN, "%d/%d/%d", year, month+1, date)
         textViewDate.text = str;
 
     }
 
+    // カレンダーダイアログの表示
     fun showDatePickerDialog(v: View) {
         val newFragment = DatePick()
         newFragment.show(supportFragmentManager, "datePicker")

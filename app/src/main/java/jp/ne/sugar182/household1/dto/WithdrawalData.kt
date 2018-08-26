@@ -1,6 +1,6 @@
 package jp.ne.sugar182.household1.dto
 
-// TODO 1行で書けるので見直し
+// 1行で書けるので見直し
 /*
 class WithdrawalData {
     // プロパティ
@@ -22,5 +22,5 @@ class WithdrawalData {
     }
 }
 */
-// 見直し後
+// 見直し後　洗練されたロンボクさんですなぁ
 data class WithdrawalData(val idx: Int, val expenseDate: String , val item: String, val xpense: Long )
