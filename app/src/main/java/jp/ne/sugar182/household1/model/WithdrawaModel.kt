@@ -9,9 +9,10 @@ import jp.ne.sugar182.household1.dto.WithdrawalData
 // ごりっとデータ操作を実装する。
 abstract class WithdrawaModel {
 
-    // null拒否で初期化不要な配列を作成するのに１時間悩む (ArrayList hoge = new ArrayList();のような)
-    // Arrayでよいのかと思ったが空配列インスタンス生成は無理であった
-    // arrayListOfでJAVAのArrayListインスタンスを作成する模様
+    // null拒否で初期化不要な配列を作成するのに１時間悩む (ArrayList hoge = new ArrayList();のような。Javaでもコンストラクタ内でしか不可ですが)
+    // Arrayでよいのかと思ったが空配列インスタンス生成は無理？
+    // arrayListOfでJAVAのArrayListインスタンスを作成する模様 new ArrayListと同義。メソッド・コンストラクタ外で記述可能
+    // たぶん実際はコンストラクタでnewされるんだろうね
     // TODO:Arrayについては再学習
     val fileName = "HouseholdData.dat"
     var withdrawds = arrayListOf<WithdrawalData>()
@@ -49,16 +50,16 @@ abstract class WithdrawaModel {
     }
 
     // KeyValue配列への変換
-    // このPair型はコトリンのオリジナル
+    // このPair型はコトリンのオリジナル。Pareって書いてGradel記述しようと思ったら認識されました。
     private fun getKeyValue(data: String): ArrayList<Pair<String, String>> {
         // ここは文法理解のためにゴリっとアルゴリズム記述
         var ret: ArrayList<Pair<String, String>>
+        ret = ArrayList(Pair("",""))
         return ret;
 
     }
 
-
-
+    abstract fun ArrayList(pair: Pair<String, String>): ArrayList<Pair<String, String>>
 
 
 }

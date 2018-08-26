@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v4.app.DialogFragment
 import java.util.Calendar
 
+// デートピッカーjavaをそのままコトリン化
 class DatePick : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
 
@@ -14,9 +15,7 @@ class DatePick : DialogFragment(), DatePickerDialog.OnDateSetListener {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-        /**
-         *
-         * */
+        // デートピッカーの表示
         return DatePickerDialog(
                 activity,
                 activity as MainActivity?,
@@ -25,7 +24,7 @@ class DatePick : DialogFragment(), DatePickerDialog.OnDateSetListener {
                 day)
     }
 
-    // TODO Main側に実装しているが、ここにも宣言する必要ありなので空メソッドを記載
+    // TODO Main側に実装しているが、ここにも宣言する必要ありなので空メソッドを記載 Java記載では一か所で済んだ？のちほど検証
     override fun onDateSet(view: android.widget.DatePicker, year: Int,
                            monthOfYear: Int, dayOfMonth: Int) {
     }
