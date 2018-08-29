@@ -15,7 +15,7 @@ abstract class WithdrawaModel {
     // たぶん実際はコンストラクタでnewされるんだろうね
     // TODO:Arrayについては再学習
     val fileName = "HouseholdData.dat"
-    var withdrawds = arrayListOf<WithdrawalData>()
+    val withdrawds = arrayListOf<WithdrawalData>()
     var maxIdx: Int = 0;
     val innnerStorage : InnerStorage
 
@@ -41,7 +41,7 @@ abstract class WithdrawaModel {
         return maxIdx + 1
     }
 
-    // ファイルをすべて読み込んでDATAオブジェクトを作成していく
+    // ファイルをすべて読み込んでDataオブジェクトを作成していく
     private fun setData() {
         val datas: ArrayList<String> = innnerStorage.readFile()
         for (data in datas) {
@@ -50,11 +50,17 @@ abstract class WithdrawaModel {
     }
 
     // KeyValue配列への変換
-    // このPair型はコトリンのオリジナル。Pareって書いてGradel記述しようと思ったら認識されました。
+    // このPair型はコトリンのオリジナル。Pareって書いてGradel記述しようと思ったら先に認識されました。
+    // "User(name=John, age=42)"って表示するtoString()
     private fun getKeyValue(data: String): ArrayList<Pair<String, String>> {
         // ここは文法理解のためにゴリっとアルゴリズム記述
-        var ret: ArrayList<Pair<String, String>>
-        ret = ArrayList(Pair("",""))
+        val i1 = data.indexOf("(")
+        val i2 = data.indexOf(")",i1 + 1)
+        val strArray = data.substring(i1 + 1, i2 -1).split(",")
+        val ret: ArrayList<Pair<String, String>> = ArrayList()
+        for (sa in strArray) {
+            ret.add(Pair(sa.split("=")[0],sa.split("=")[1]))
+        }
         return ret;
 
     }
