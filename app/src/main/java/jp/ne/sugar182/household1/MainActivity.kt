@@ -4,16 +4,16 @@ import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
+import android.view.Menu
 import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.DatePicker
+import java.security.KeyStore
 import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
-
-    //var innerStorage: InnerStorage = InnerStorage()
-
 
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
@@ -37,8 +37,8 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         val saveButton = findViewById<Button>(R.id.buttonSave);
 
         buttonSave.setOnClickListener {
-            innerStorage = InnerStorage()
-            innerStorage.saveFile(filename, getString(R.string.test), applicationContext)
+            //innerStorage = InnerStorage()
+            //innerStorage.saveFile(filename, getString(R.string.test), applicationContext)
         }
     }
 
@@ -54,5 +54,27 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         val newFragment = DatePick()
         newFragment.show(supportFragmentManager, "datePicker")
 
+    }
+
+    // メニューの追加
+    override fun onCreateOptionsMenu(menu: Menu): Boolean{
+        // 戻りの型の指定し忘れでGoogle先生に１時間質問する
+        getMenuInflater().inflate(R.menu.option, menu);
+        return true
+
+    }
+
+    // メニュー選択時のアクション
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // getMenuItem可ItemId直参照かで悩む　正解は不明
+        when (item.itemId) {
+            (R.id.summary) -> {
+                // インテント作って別画面へ
+            }
+            (R.id.finish ) -> {
+                finish()
+            }
+        }
+        return true
     }
 }
