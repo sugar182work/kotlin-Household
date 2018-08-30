@@ -44,7 +44,7 @@ abstract class WithdrawaModel {
     // ファイルをすべて読み込んでDataオブジェクトを作成していく
     private fun setData() {
         val datas: ArrayList<String> = innnerStorage.readFile()
-        for (data in datas) {
+        for (pair in datas){
 
         }
     }
