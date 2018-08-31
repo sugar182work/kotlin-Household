@@ -70,6 +70,10 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         when (item.itemId) {
             (R.id.summary) -> {
                 // インテント作って別画面へ
+                // 遷移先のActivityを指定して、Intentを作成する
+                val intent = Intent(application, SecondActivity::class.java)
+                // 遷移先のアクティビティを起動させる
+                startActivity(intent)
             }
             (R.id.finish ) -> {
                 finish()

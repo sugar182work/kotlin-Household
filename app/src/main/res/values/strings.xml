@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">家計簿サンプル</string>
+    <string name="app_name">kotlin家計簿</string>
     <string name="save">保存する</string>
     <string name="pay_type">項目</string>
     <string name="pay_value">支出額</string>
