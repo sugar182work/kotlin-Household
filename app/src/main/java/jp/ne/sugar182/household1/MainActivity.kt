@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         }
         */
 
-        val filename: String = getString(R.string.file_name)
+        //val filename: String = getString(R.string.file_name)
 
         //ボタン押下で情報登録
         val saveButton = findViewById<Button>(R.id.buttonSave);
