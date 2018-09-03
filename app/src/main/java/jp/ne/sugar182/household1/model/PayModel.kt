@@ -2,12 +2,12 @@ package jp.ne.sugar182.household1.model
 
 import android.content.Context
 import jp.ne.sugar182.household1.InnerStorage
-import jp.ne.sugar182.household1.dto.WithdrawalData
+import jp.ne.sugar182.household1.dto.PayData
 
 // モデルとしてみたけど View（Activity）に情報を返すかは未定
 // MVPモデルぽくなるのかな？
 // ごりっとデータ操作を実装する。
-abstract class WithdrawaModel {
+abstract class PayModel {
 
     // null拒否で初期化不要な配列を作成するのに１時間悩む (ArrayList hoge = new ArrayList();のような。Javaでもコンストラクタ内でしか不可ですが)
     // Arrayでよいのかと思ったが空配列インスタンス生成は無理？
@@ -15,7 +15,7 @@ abstract class WithdrawaModel {
     // たぶん実際はコンストラクタでnewされるんだろうね
     // TODO:Arrayについては再学習
     val fileName = "HouseholdData.dat"
-    val withdrawds = arrayListOf<WithdrawalData>()
+    val payDatas = arrayListOf<PayData>()
     var maxIdx: Int = 0;
     val innnerStorage : InnerStorage
 
@@ -24,16 +24,16 @@ abstract class WithdrawaModel {
     }
 
     //view層が利用するfunを実装 TODO Interfaceで実装
-    fun addData(withdrawalData: WithdrawalData) {
-        withdrawds.add(withdrawalData)
+    fun addData(payData: PayData) {
+        payDatas.add(payData)
     }
 
-    fun remove(withdrawalData: WithdrawalData) {
-        withdrawds.remove(withdrawalData)
+    fun remove(payData: PayData) {
+        payDatas.remove(payData)
     }
 
-    fun createWithdrawalData(item: String, expense: Long, expenseDate: String): WithdrawalData {
-        return WithdrawalData(getNewIndex(), expenseDate, item, expense)
+    fun createWithdrawalData(item: String, expense: Long, expenseDate: String): PayData {
+        return PayData(getNewIndex(), expenseDate, item, expense)
     }
 
     // プライベートなfunを実装
