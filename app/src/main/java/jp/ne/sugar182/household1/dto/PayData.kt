@@ -23,4 +23,4 @@ class WithdrawalData {
 }
 */
 // 見直し後　洗練されたロンボクさんですなぁ
-data class PayData(val idx: Int, val expenseDate: String , val item: String, val xpense: Long )
+data class PayData(val idx: Int, val expenseDate: String , val item: String, val expense: Long )
