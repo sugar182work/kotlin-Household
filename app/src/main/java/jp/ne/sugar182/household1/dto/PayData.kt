@@ -17,4 +17,4 @@ class WithdrawalData(idx: Int,item: String, pay: Long, payDate: String) {
 }
 */
 // 見直し後　洗練されたロンボクさんですなぁ
-data class PayData(val idx: Int, val payDatre: String , val item: String, val payCurrency: Currency )
+data class PayData(val idx: Int, val payDatre: String , val item: String, val payCurrency: Long )

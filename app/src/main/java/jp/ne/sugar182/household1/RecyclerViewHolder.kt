@@ -7,7 +7,6 @@ import android.widget.TextView
 import jp.ne.sugar182.household1.dto.PayData
 import jp.ne.sugar182.household1.dto.PayListData
 
-
 class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
     // 独自に作成したListener
@@ -15,14 +14,8 @@ class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun onItemClick(view: View, position: Int)
     }
 
-    val payListData: PayListData = PayListData(view.findViewById(R.id.expenseDateText )
-            ,findViewById(R.id.itemText),
-            Integer.parseInt(view.findViewById(R.id.xpenseText)))
-
-    val dateTextView: TextView = view.findViewById(R.id.expenseDateText)
-    val itemTextView: TextView = view.findViewById(R.id.itemText)
-    val payCurTextView: TextView = view.findViewById(R.id.xpenseText)
-
+    val itemTextView: TextView = view.findViewById(R.id.itemTextView)
+    val itemImageView: ImageView = view.findViewById(R.id.itemImageView)
 
     init {
         // layoutの初期設定するときはココ

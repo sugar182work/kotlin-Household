@@ -3,26 +3,27 @@ package jp.ne.sugar182.household1
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ListView
+import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_second.*
 
-class SecondActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
+class SecondActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
-
         // アクションバーに前画面に戻る機能をつける
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
 
-        // リストビューの追加
-        val listView = findViewById<ListView>(R.id.list_view)
-        listView.setOnItemClickListener(this);
+        val hoges = resources.getStringArray(R.array.hoges).toMutableList()
+
+        mainRecyclerView.adapter = RecyclerAdapter(this, this, hoges)
+        mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
     }
 
     // 戻るボタンのリスナー
@@ -40,9 +41,9 @@ class SecondActivity : AppCompatActivity(), AdapterView.OnItemClickListener {
         return super.onOptionsItemSelected(item)
     }
 
-    // ListViewのタップのリスナー
-    override fun onItemClick(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun onItemClick(view: View, position: Int) {
+        Toast.makeText(applicationContext, "position $position was tapped", Toast.LENGTH_SHORT).show()
     }
-
 }
+
+

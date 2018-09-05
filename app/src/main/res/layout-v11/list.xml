@@ -13,9 +13,15 @@
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:gravity="center_vertical">
+        <TextView
+            android:id="@+id/idxDateText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="date" />
 
         <TextView
-            android:id="@+id/expenseDateText"
+            android:id="@+id/payDateText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -29,10 +35,10 @@
             android:text="item" />
 
         <TextView
-            android:id="@+id/xpenseText"
+            android:id="@+id/payText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="xpense" />
+            android:text="pay" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

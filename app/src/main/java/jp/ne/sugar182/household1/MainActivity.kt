@@ -10,7 +10,6 @@ import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.DatePicker
-import java.security.KeyStore
 import java.util.*
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
@@ -34,7 +33,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         //val filename: String = getString(R.string.file_name)
 
         //ボタン押下で情報登録
-        val saveButton = findViewById<Button>(R.id.buttonSave);
+        val buttonSave = findViewById<Button>(R.id.buttonSave);
 
         buttonSave.setOnClickListener {
             //innerStorage = InnerStorage()

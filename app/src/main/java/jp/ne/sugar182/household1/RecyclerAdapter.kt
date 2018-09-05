@@ -8,37 +8,36 @@ import jp.ne.sugar182.household1.dto.PayData
 
 class RecyclerAdapter(private val context: Context,
                       private val itemClickListener: RecyclerViewHolder.ItemClickListener,
-                      private val payList:List<PayData>) : RecyclerView.Adapter<RecyclerViewHolder>() {
+                      private val itemList:List<String>) : RecyclerView.Adapter<RecyclerViewHolder>() {
 
-    private var mRecyclerView: RecyclerView? = null
+    private var mRecyclerView : RecyclerView? = null
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+        super.onAttachedToRecyclerView(recyclerView!!)
         mRecyclerView = recyclerView
     }
 
-    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
-        super.onDetachedFromRecyclerView(recyclerView)
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView?) {
+        super.onDetachedFromRecyclerView(recyclerView!!)
         mRecyclerView = null
 
     }
 
-    override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerViewHolder?, position: Int) {
         holder?.let {
-            it.itemTextView.text = payList.get(position).item
-            it.dateTextView = payList.get(position).payDatre
-            it.payListData = payList.get(position).payCurrency.toString()
+            it.itemTextView.text = itemList.get(position)
+            it.itemImageView.setImageResource(R.mipmap.ic_launcher)
         }
     }
 
     override fun getItemCount(): Int {
-        return payList.size
+        return itemList.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): RecyclerViewHolder {
 
         val layoutInflater = LayoutInflater.from(context)
-        val mView = layoutInflater.inflate(R.layout.list, parent, false)
+        val mView = layoutInflater.inflate(R.layout.list_item, parent, false)
 
         mView.setOnClickListener { view ->
             mRecyclerView?.let {
@@ -48,4 +47,5 @@ class RecyclerAdapter(private val context: Context,
 
         return RecyclerViewHolder(mView)
     }
+
 }

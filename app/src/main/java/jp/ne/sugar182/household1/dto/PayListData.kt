@@ -1,3 +1,5 @@
 package jp.ne.sugar182.household1.dto
 
-data class PayListData(val payDate: String , val item: String, val expense: Long )
+import java.util.*
+
+data class PayListData(val payDatre: String , val item: String, val payCurrency: Currency)

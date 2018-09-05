@@ -32,8 +32,8 @@ abstract class PayModel {
         payDatas.remove(payData)
     }
 
-    fun createWithdrawalData(item: String, expense: Long, expenseDate: String): PayData {
-        return PayData(getNewIndex(), expenseDate, item, expense)
+    fun createWithdrawalData(item: String, pay: Long, expenseDate: String): PayData {
+        return PayData(getNewIndex(), expenseDate, item, pay)
     }
 
     // プライベートなfunを実装
