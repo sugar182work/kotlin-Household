@@ -15,10 +15,10 @@ class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun onItemClick(view: View, position: Int)
     }
 
-    val payListData: PayListData = PayListData(view.findViewById(R.id.expenseDateText,
-            view.findViewById(R.id.itemText),
-    Integer.poerserInt(iew.findViewById(R.id.xpenseText))
-    )
+    val payListData: PayListData = PayListData(view.findViewById(R.id.expenseDateText )
+            ,findViewById(R.id.itemText),
+            Integer.parseInt(view.findViewById(R.id.xpenseText)))
+
     val dateTextView: TextView = view.findViewById(R.id.expenseDateText)
     val itemTextView: TextView = view.findViewById(R.id.itemText)
     val payCurTextView: TextView = view.findViewById(R.id.xpenseText)

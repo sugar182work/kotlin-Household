@@ -4,20 +4,12 @@ import java.util.*
 
 // 1行で書けるので見直し
 /*
-class WithdrawalData {
+class WithdrawalData(idx: Int,item: String, pay: Long, payDate: String) {
     // プロパティ
-    var idx: Int = 0        // index
-    var item: String = ""   // 出費のアイテム
-    var expense: Long = 0   // 金額
-    var expenseDate: String = "" //日付
-
-    // コンストラクタ
-    constructor(idx: Int,item: String, expense: Long, expenseDate: String) {
-        this.idx = idx
-        this.item = item
-        this.expense = expense
-        this.expenseDate = expenseDate
-    }
+    var idx: Int = idx          // index
+    var item: String = item     // 出費のアイテム
+    var pay: Long = pay         // 金額
+    var payDate: String = payDate //日付
 
     fun getStringData(): String {
         return "$idx, $item, $expense, $expenseDate"
