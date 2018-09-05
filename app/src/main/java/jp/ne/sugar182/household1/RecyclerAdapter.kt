@@ -26,8 +26,8 @@ class RecyclerAdapter(private val context: Context,
     override fun onBindViewHolder(holder: RecyclerViewHolder, position: Int) {
         holder?.let {
             it.itemTextView.text = payList.get(position).item
-            it.dateTextView.text= payList.get(position).expenseDate
-            it.xpenseTextView.text = payList.get(position).expense.toString()
+            it.dateTextView = payList.get(position).payDatre
+            it.payListData = payList.get(position).payCurrency.toString()
         }
     }
 

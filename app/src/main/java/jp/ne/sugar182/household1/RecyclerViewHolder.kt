@@ -21,7 +21,7 @@ class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     )
     val dateTextView: TextView = view.findViewById(R.id.expenseDateText)
     val itemTextView: TextView = view.findViewById(R.id.itemText)
-    val xpenseTextView: TextView = view.findViewById(R.id.xpenseText)
+    val payCurTextView: TextView = view.findViewById(R.id.xpenseText)
 
 
     init {
