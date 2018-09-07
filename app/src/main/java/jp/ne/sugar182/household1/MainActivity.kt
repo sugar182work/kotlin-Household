@@ -10,7 +10,9 @@ import android.view.View
 import android.widget.Button
 import kotlinx.android.synthetic.main.activity_main.*
 import android.widget.DatePicker
+import jp.ne.sugar182.household1.util.SharedPreferencesUtil
 import java.util.*
+import android.widget.ArrayAdapter
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
@@ -18,24 +20,27 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        /*
-        // ボタン押下で他画面起動
-        val dateSelectButton = findViewById<Button>(R.id.buttonDateSelect);
+        //シェアードからとってきてadapterを作って渡す
+        val sharedUtil = SharedPreferencesUtil(this)
+        val items = arrayListOf<String>()
+        val keys = resources.getStringArray(R.array.keys).toMutableList()
 
-        dateSelectButton.setOnClickListener {
-
-            // std ::でclass.javaの参照を指定している？
-            val intent = Intent(this, DateSelectActivity::class.java);
-            startActivity(intent);
+        // TODO 修正
+        for (key in keys) {
+            if (key != "") {
+                var ret = sharedUtil.get(key)
+                if (ret != "") {
+                    items.add(ret)
+                }
+            }
         }
-        */
-
-        //val filename: String = getString(R.string.file_name)
+        val adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, items)
+        itemText.setAdapter(adapter)
 
         //ボタン押下で情報登録
-        val buttonSave = findViewById<Button>(R.id.buttonSave);
+        val saveButton = findViewById<Button>(R.id.saveButton);
 
-        buttonSave.setOnClickListener {
+        saveButton.setOnClickListener {
             //innerStorage = InnerStorage()
             //innerStorage.saveFile(filename, getString(R.string.test), applicationContext)
         }
