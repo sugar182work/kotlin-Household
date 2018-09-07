@@ -1,7 +1,5 @@
 package jp.ne.sugar182.household1.dto
 
-import java.util.*
-
 // 1行で書けるので見直し
 /*
 class WithdrawalData(idx: Int,item: String, pay: Long, payDate: String) {
@@ -17,4 +15,4 @@ class WithdrawalData(idx: Int,item: String, pay: Long, payDate: String) {
 }
 */
 // 見直し後　洗練されたロンボクさんですなぁ
-data class PayData(val idx: Int, val payDatre: String , val item: String, val payCurrency: Long )
+data class PayData(val idx: Int, val payDate: String , val item: String, val payCurrency: Long )

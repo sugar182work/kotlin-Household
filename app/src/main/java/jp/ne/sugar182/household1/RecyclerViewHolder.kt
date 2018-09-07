@@ -4,8 +4,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import jp.ne.sugar182.household1.dto.PayData
-import jp.ne.sugar182.household1.dto.PayListData
 
 class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 

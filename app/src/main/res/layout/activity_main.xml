@@ -7,7 +7,7 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textViewDate"
+        android:id="@+id/dateText"
         android:layout_width="190dp"
         android:layout_height="45dp"
         android:layout_marginStart="36dp"
@@ -24,7 +24,7 @@
         android:layout_marginStart="56dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewDate" />
+        app:layout_constraintTop_toBottomOf="@+id/dateText" />
 
     <EditText
         android:id="@+id/payText"
@@ -57,7 +57,7 @@
         android:layout_marginTop="24dp"
         android:onClick="showDatePickerDialog"
         android:text="@string/open_details"
-        app:layout_constraintStart_toEndOf="@+id/textViewDate"
+        app:layout_constraintStart_toEndOf="@+id/dateText"
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.support.constraint.Guideline

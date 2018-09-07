@@ -1,18 +1,19 @@
 package jp.ne.sugar182.household1
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.Menu
 import android.view.View
-import android.widget.Button
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
-import android.widget.DatePicker
-import jp.ne.sugar182.household1.util.SharedPreferencesUtil
 import java.util.*
-import android.widget.ArrayAdapter
+import jp.ne.sugar182.household1.dto.PayData
+import jp.ne.sugar182.household1.model.ItemModel
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
@@ -20,36 +21,86 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //シェアードからとってきてadapterを作って渡す
-        val sharedUtil = SharedPreferencesUtil(this)
-        val items = arrayListOf<String>()
-        val keys = resources.getStringArray(R.array.keys).toMutableList()
+        // ドッカのリポジトリ層に移動
+        val itemModel = ItemModel(this)
 
-        // TODO 修正
-        for (key in keys) {
-            if (key != "") {
-                var ret = sharedUtil.get(key)
-                if (ret != "") {
-                    items.add(ret)
-                }
-            }
-        }
-        val adapter = ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, items)
+        //オートコンプリート関連
+        val list = itemModel.getAutCompleteList()
+        //val list = arrayOf("朝ごはん","昼ごはん","夜ごはん","交通費")
+        val adapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, list)
+        //アダプターのセット
         itemText.setAdapter(adapter)
+        //最低行数のセット
+        itemText.threshold = 1
+
 
         //ボタン押下で情報登録
         val saveButton = findViewById<Button>(R.id.saveButton);
-
         saveButton.setOnClickListener {
-            //innerStorage = InnerStorage()
-            //innerStorage.saveFile(filename, getString(R.string.test), applicationContext)
+            val pay = if (payText.text.toString() == "") {
+                0
+            } else {
+                payText.text.toString().toLong()
+            }
+            val payData = PayData(0, dateText.text.toString(), itemText.text.toString(), pay)
+            if (checkData(payData)) {
+                itemModel.addItem(payData.item)
+            } else {
+                checkError()
+            }
+
+
+
+
+
+
+
+            // Set an item click listener for auto complete text view
+            itemText.onItemClickListener = AdapterView.OnItemClickListener{
+                parent,view,position,id->
+                val selectedItem = parent.getItemAtPosition(position).toString()
+                // Display the clicked item using toast
+                Toast.makeText(applicationContext,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
+            }
+
+
+            // Set a dismiss listener for auto complete text view
+            itemText.setOnDismissListener {
+                Toast.makeText(applicationContext,"Suggestion closed.",Toast.LENGTH_SHORT).show()
+            }
+
         }
+        // Set a focus change listener for auto complete text view
+        itemText.onFocusChangeListener = View.OnFocusChangeListener{
+            view, b ->
+            if(b){
+                // Display the suggestion dropdown on focus
+                itemText.showDropDown()
+            }
+        }
+
     }
+    // 画面回転危険
+    private fun checkError() {
+        AlertDialog.Builder(this)
+                .setTitle("入力エラー")
+                .setPositiveButton("ok"){ dialog, which ->
+                }.show()
+    }
+    private fun checkData(payData: PayData) : Boolean {
+        if (payData.payCurrency <= 0) {
+            Log.d("Long試験", "0以下")
+        } else {
+            Log.d("Long試験", "安心")
+        }
+        return !(payData.item == "" || payData.payCurrency <= 0 || payData.payDate == "")
+    }
+
 
     // TODO ここに実装するのはちょっと納得がいっていない　javaではごまかせた気がするので再検証
     override fun onDateSet(view: DatePicker, year: Int, month: Int, date: Int ) {
         val str = String.format(Locale.JAPAN, "%d/%d/%d", year, month+1, date)
-        textViewDate.text = str;
+        dateText.text = str;
 
     }
 
