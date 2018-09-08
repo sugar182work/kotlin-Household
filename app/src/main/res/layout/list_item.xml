@@ -11,8 +11,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
         <ImageView
             android:id="@+id/itemImageView"
@@ -21,9 +21,23 @@
             android:layout_margin="8dp" />
 
         <TextView
-            android:id="@+id/itemTextView"
-            android:layout_width="match_parent"
+            android:id="@+id/idxText"
+            android:layout_width="25dp"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/dateText"
+            android:layout_width="83dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/itemText"
+            android:layout_width="102dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/payText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </LinearLayout>
 </android.support.v7.widget.CardView>

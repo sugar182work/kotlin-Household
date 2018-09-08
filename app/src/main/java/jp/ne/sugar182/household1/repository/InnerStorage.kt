@@ -1,18 +1,11 @@
-package jp.ne.sugar182.household1
+package jp.ne.sugar182.household1.repository
 
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import java.io.IOException
 
-class InnerStorage {
-    var fileName = ""
-    var context: Context
-
-    constructor(fileName: String, context: Context) {
-        this.fileName = fileName
-        this.context = context
-    }
+class InnerStorage(val fileName: String, val context: Context) {
 
     // 内部ストレージへの書き込み
     fun saveFile(saveData: String) {
@@ -25,8 +18,9 @@ class InnerStorage {
 
         // java風に書いてみる
         try {
-            val fileOutputStream = context.openFileOutput(fileName, MODE_PRIVATE)
+            val fileOutputStream = context.openFileOutput(fileName, Context.MODE_APPEND)
             fileOutputStream.write(saveData.toByteArray())
+            fileOutputStream.write("\n".toByteArray())
             fileOutputStream.close()
         } catch (e: IOException) {
             Log.d("IOException", e.stackTrace.toString())

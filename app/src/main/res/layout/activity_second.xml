@@ -28,12 +28,14 @@
 
         <Button
             android:id="@+id/preButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="202dp"
             android:layout_height="wrap_content"
             android:text="＜＜" />
 
         <Button
             android:id="@+id/nextButton"
+            style="@style/Widget.AppCompat.Button.Borderless.Colored"
             android:layout_width="202dp"
             android:layout_height="wrap_content"
             android:text="＞＞" />

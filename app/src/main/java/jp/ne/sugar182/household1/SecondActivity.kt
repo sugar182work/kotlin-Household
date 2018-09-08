@@ -7,23 +7,60 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import jp.ne.sugar182.household1.model.PayModel
+import jp.ne.sugar182.household1.util.DateUtilEx
 import kotlinx.android.synthetic.main.activity_second.*
 
 class SecondActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener {
+    lateinit var payModel: PayModel
+    lateinit var month: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
+
         requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
         // アクションバーに前画面に戻る機能をつける
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
 
-        val hoges = resources.getStringArray(R.array.hoges).toMutableList()
+        payModel = PayModel(this)
+        month = DateUtilEx().getNowMonthString()
 
-        mainRecyclerView.adapter = RecyclerAdapter(this, this, hoges)
+        val monthData = payModel.getMonthData(month)
+
+        mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
         mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
+        totalTxt.text = payModel.getTotal(month)
+        monthTxt.text = month
+
+        // 前月
+        preButton.setOnClickListener{
+            var pre_month = DateUtilEx().preMonth(month)
+            val monthData = payModel.getMonthData(pre_month)
+            if (monthData != null) {
+                month = pre_month
+                monthTxt.text = month
+                totalTxt.text = payModel.getTotal(month)
+                mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
+                mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            }
+        }
+
+        // 翌月
+        nextButton.setOnClickListener {
+            var next_month = DateUtilEx().nextMonth(month)
+            val monthData = payModel.getMonthData(next_month)
+            if (monthData != null) {
+                month = next_month
+                monthTxt.text = month
+                totalTxt.text = payModel.getTotal(month)
+                mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
+                mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+
+            }
+        }
     }
 
     // 戻るボタンのリスナー

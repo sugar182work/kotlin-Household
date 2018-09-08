@@ -4,10 +4,13 @@ import android.content.Context
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import jp.ne.sugar182.household1.dto.PayData
+import kotlinx.android.synthetic.main.list_item.view.*
 
+// 自動生成されたまま TODO
 class RecyclerAdapter(private val context: Context,
                       private val itemClickListener: RecyclerViewHolder.ItemClickListener,
-                      private val itemList:List<String>) : RecyclerView.Adapter<RecyclerViewHolder>() {
+                      private val itemList:List<PayData>) : RecyclerView.Adapter<RecyclerViewHolder>() {
 
     private var mRecyclerView : RecyclerView? = null
 
@@ -24,7 +27,10 @@ class RecyclerAdapter(private val context: Context,
 
     override fun onBindViewHolder(holder: RecyclerViewHolder?, position: Int) {
         holder?.let {
-            it.itemTextView.text = itemList.get(position)
+            it.idxTextView.text = itemList.get(position).idx.toString()
+            it.dateTextView.text = itemList.get(position).payDate
+            it.itemTextView.text = itemList.get(position).item
+            it.payTextView.text = itemList.get(position).pay.toString()
             it.itemImageView.setImageResource(R.mipmap.ic_launcher)
         }
     }

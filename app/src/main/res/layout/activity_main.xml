@@ -8,12 +8,13 @@
 
     <TextView
         android:id="@+id/dateText"
-        android:layout_width="190dp"
+        android:layout_width="131dp"
         android:layout_height="45dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
         android:text="@string/date_placeholder"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toEndOf="@+id/textView"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
@@ -54,7 +55,8 @@
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
         android:layout_width="85dp"
         android:layout_height="40dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="28dp"
         android:onClick="showDatePickerDialog"
         android:text="@string/open_details"
         app:layout_constraintStart_toEndOf="@+id/dateText"
@@ -66,6 +68,17 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="20dp" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="79dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:gravity="center_vertical"
+        android:text="浪費した日"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,71 +1,92 @@
 package jp.ne.sugar182.household1.model
 
 import android.content.Context
-import jp.ne.sugar182.household1.InnerStorage
+import android.util.Log
+import jp.ne.sugar182.household1.repository.InnerStorage
 import jp.ne.sugar182.household1.dto.PayData
+import jp.ne.sugar182.household1.dto.PayDataMapper
 
 // モデルとしてみたけど View（Activity）に情報を返すかは未定
 // MVPモデルぽくなるのかな？
 // ごりっとデータ操作を実装する。
-abstract class PayModel {
+// アプリケーションコンテキストにする？
+class PayModel(context: Context) {
 
-    // null拒否で初期化不要な配列を作成するのに１時間悩む (ArrayList hoge = new ArrayList();のような。Javaでもコンストラクタ内でしか不可ですが)
-    // Arrayでよいのかと思ったが空配列インスタンス生成は無理？
-    // arrayListOfでJAVAのArrayListインスタンスを作成する模様 new ArrayListと同義。メソッド・コンストラクタ外で記述可能
-    // たぶん実際はコンストラクタでnewされるんだろうね
-    // TODO:Arrayについては再学習
+    // まず、１件のデータを作成
+    // 全データのLIST化
+    // 月毎のマップ　MAP(月,List)化
+
     val fileName = "HouseholdData.dat"
-    val payDatas = arrayListOf<PayData>()
-    var maxIdx: Int = 0;
-    val innnerStorage : InnerStorage
+    val innnerStorage = InnerStorage(fileName, context)
 
-    constructor(context: Context) {
-        innnerStorage  = InnerStorage(fileName, context)
+    var maxIdx: Int = 0;
+    val payDatas = arrayListOf<PayData>()
+    val allMonthData = mutableMapOf<String, MutableList<PayData>>()
+
+    init {
+        //最初に全データを読み込む
+        val datas = innnerStorage.readFile()
+
+        for (data in datas) {
+            Log.d("innnerStorageData", data)
+            val payData = PayDataMapper().createPayData(data)
+            val month = payData.payDate.substring(0, 7)
+            Log.d("month", payData.payDate.substring(0, 7))
+
+            // 月毎のリストにも登録（メモリー参照になってるといいな）
+            setMonthData(payData)
+
+            maxIdx++
+        }
     }
+
+    fun setMonthData(payData: PayData) {
+        val month = payData.payDate.substring(0, 7)
+        if (allMonthData.containsKey(month)) {
+            allMonthData.get(month)!!.add(payData)
+        } else {
+            val payList: MutableList<PayData> = mutableListOf(payData)
+            allMonthData.put(month, payList)
+        }
+    }
+
 
     //view層が利用するfunを実装 TODO Interfaceで実装
     fun addData(payData: PayData) {
+        // インデックスを生成して書き込み
+        payData.idx = getNewIndex()
         payDatas.add(payData)
+
+        innnerStorage.saveFile(PayDataMapper().createJsonString(payData))
     }
 
     fun remove(payData: PayData) {
         payDatas.remove(payData)
     }
 
-    fun createWithdrawalData(item: String, pay: Long, expenseDate: String): PayData {
-        return PayData(getNewIndex(), expenseDate, item, pay)
-    }
-
     // プライベートなfunを実装
     private fun getNewIndex(): Int {
-        return maxIdx + 1
+        maxIdx++
+        return maxIdx
     }
 
-    // ファイルをすべて読み込んでDataオブジェクトを作成していく
-    private fun setData() {
-        val datas: ArrayList<String> = innnerStorage.readFile()
-        for (pair in datas){
 
+    // Null非許容に変えたい
+    fun getMonthData(month : String): MutableList<PayData>? {
+        return allMonthData.get(month)
+    }
+
+    //月の合計取得
+    fun getTotal(month : String) : String{
+        var sum : Long = 0
+        val payDatas = getMonthData(month)
+        if (payDatas != null) {
+            for (payData in payDatas) {
+                sum = sum + payData.pay
+            }
         }
+        return sum.toString()
     }
-
-    // KeyValue配列への変換
-    // このPair型はコトリンのオリジナル。Pareって書いてGradel記述しようと思ったら先に認識されました。
-    // "User(name=John, age=42)"って表示するtoString()
-    private fun getKeyValue(data: String): ArrayList<Pair<String, String>> {
-        // ここは文法理解のためにゴリっとアルゴリズム記述
-        val i1 = data.indexOf("(")
-        val i2 = data.indexOf(")",i1 + 1)
-        val strArray = data.substring(i1 + 1, i2 -1).split(",")
-        val ret: ArrayList<Pair<String, String>> = ArrayList()
-        for (sa in strArray) {
-            ret.add(Pair(sa.split("=")[0],sa.split("=")[1]))
-        }
-        return ret;
-
-    }
-
-    abstract fun ArrayList(pair: Pair<String, String>): ArrayList<Pair<String, String>>
 
 
 }

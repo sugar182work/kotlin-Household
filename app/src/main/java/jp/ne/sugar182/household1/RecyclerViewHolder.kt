@@ -12,7 +12,10 @@ class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun onItemClick(view: View, position: Int)
     }
 
-    val itemTextView: TextView = view.findViewById(R.id.itemTextView)
+    val idxTextView: TextView = view.findViewById(R.id.idxText)
+    val dateTextView: TextView = view.findViewById(R.id.dateText)
+    val itemTextView: TextView = view.findViewById(R.id.itemText)
+    val payTextView: TextView = view.findViewById(R.id.payText)
     val itemImageView: ImageView = view.findViewById(R.id.itemImageView)
 
     init {

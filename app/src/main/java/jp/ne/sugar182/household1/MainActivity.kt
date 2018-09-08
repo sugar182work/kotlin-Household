@@ -14,14 +14,24 @@ import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 import jp.ne.sugar182.household1.dto.PayData
 import jp.ne.sugar182.household1.model.ItemModel
+import jp.ne.sugar182.household1.model.PayModel
+import jp.ne.sugar182.household1.util.DateUtilEx
 
+// コトリン学習１作目
+// アーキテクチャーパターンとか採用せずにぐりぐりと実装　View層肥大しててすみません
+// ・シェアードの読み書き
+// ・内部ストレージの読み書き
+// ・その他文法、癖の確認
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // ドッカのリポジトリ層に移動
+        // 日付の初期値設定
+        dateText.text = DateUtilEx().getNowString()
+
+        // アイテムリストの処理
         val itemModel = ItemModel(this)
 
         //オートコンプリート関連
@@ -33,9 +43,12 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         //最低行数のセット
         itemText.threshold = 1
 
+        // データモデルを作成TODO ここじゃないかな
+        val payModel = PayModel(this)
+
 
         //ボタン押下で情報登録
-        val saveButton = findViewById<Button>(R.id.saveButton);
+        //val saveButton = findViewById<Button>(R.id.saveButton);
         saveButton.setOnClickListener {
             val pay = if (payText.text.toString() == "") {
                 0
@@ -43,34 +56,32 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
                 payText.text.toString().toLong()
             }
             val payData = PayData(0, dateText.text.toString(), itemText.text.toString(), pay)
+
+
             if (checkData(payData)) {
+                // シェアードに書き込み
                 itemModel.addItem(payData.item)
+                // Payデータに書き込み
+                payModel.addData(payData)
             } else {
                 checkError()
             }
 
-
-
-
-
-
-
-            // Set an item click listener for auto complete text view
-            itemText.onItemClickListener = AdapterView.OnItemClickListener{
-                parent,view,position,id->
-                val selectedItem = parent.getItemAtPosition(position).toString()
-                // Display the clicked item using toast
-                Toast.makeText(applicationContext,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
-            }
-
-
-            // Set a dismiss listener for auto complete text view
-            itemText.setOnDismissListener {
-                Toast.makeText(applicationContext,"Suggestion closed.",Toast.LENGTH_SHORT).show()
-            }
-
         }
-        // Set a focus change listener for auto complete text view
+
+        // デバッグ用
+        itemText.onItemClickListener = AdapterView.OnItemClickListener{
+            parent,view,position,id->
+            val selectedItem = parent.getItemAtPosition(position).toString()
+            // Display the clicked item using toast
+            Toast.makeText(applicationContext,"Selected : $selectedItem",Toast.LENGTH_SHORT).show()
+        }
+
+
+        itemText.setOnDismissListener {
+            Toast.makeText(applicationContext,"Suggestion closed.",Toast.LENGTH_SHORT).show()
+        }
+
         itemText.onFocusChangeListener = View.OnFocusChangeListener{
             view, b ->
             if(b){
@@ -80,26 +91,28 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         }
 
     }
-    // 画面回転危険
+    // エラーダイアログ　画面回転危険 TODOそのうち見直し
     private fun checkError() {
         AlertDialog.Builder(this)
                 .setTitle("入力エラー")
                 .setPositiveButton("ok"){ dialog, which ->
                 }.show()
     }
+
+
     private fun checkData(payData: PayData) : Boolean {
-        if (payData.payCurrency <= 0) {
+        if (payData.pay <= 0) {
             Log.d("Long試験", "0以下")
         } else {
             Log.d("Long試験", "安心")
         }
-        return !(payData.item == "" || payData.payCurrency <= 0 || payData.payDate == "")
+        return !(payData.item == "" || payData.pay <= 0 || payData.payDate == "")
     }
 
 
     // TODO ここに実装するのはちょっと納得がいっていない　javaではごまかせた気がするので再検証
     override fun onDateSet(view: DatePicker, year: Int, month: Int, date: Int ) {
-        val str = String.format(Locale.JAPAN, "%d/%d/%d", year, month+1, date)
+        val str = String.format(Locale.JAPAN, "%02d/%02d/%02d", year, month+1, date)
         dateText.text = str;
 
     }
