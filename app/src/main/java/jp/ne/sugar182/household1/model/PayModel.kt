@@ -9,19 +9,19 @@ import jp.ne.sugar182.household1.dto.PayDataMapper
 // モデルとしてみたけど View（Activity）に情報を返すかは未定
 // MVPモデルぽくなるのかな？
 // ごりっとデータ操作を実装する。
-// アプリケーションコンテキストにする？
+// アプリケーションコンテキストにする？サブでも生成する
 class PayModel(context: Context) {
 
     // まず、１件のデータを作成
     // 全データのLIST化
     // 月毎のマップ　MAP(月,List)化
 
-    val fileName = "HouseholdData.dat"
-    val innnerStorage = InnerStorage(fileName, context)
+    private val fileName = "HouseholdData.dat"
+    private val innnerStorage = InnerStorage(fileName, context)
 
-    var maxIdx: Int = 0;
-    val payDatas = arrayListOf<PayData>()
-    val allMonthData = mutableMapOf<String, MutableList<PayData>>()
+    private var maxIdx: Int = 0;
+    private val payDatas = arrayListOf<PayData>()
+    private val allMonthData = mutableMapOf<String, MutableList<PayData>>()
 
     init {
         //最初に全データを読み込む
@@ -82,7 +82,7 @@ class PayModel(context: Context) {
         val payDatas = getMonthData(month)
         if (payDatas != null) {
             for (payData in payDatas) {
-                sum = sum + payData.pay
+                sum += payData.pay
             }
         }
         return sum.toString()

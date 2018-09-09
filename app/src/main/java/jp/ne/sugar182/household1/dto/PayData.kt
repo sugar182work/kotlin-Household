@@ -2,7 +2,7 @@ package jp.ne.sugar182.household1.dto
 
 // 1行で書けるので見直し
 /*
-class WithdrawalData(idx: Int,item: String, pay: Long, payDate: String) {
+class PayData(idx: Int,item: String, pay: Long, payDate: String) {
     // プロパティ
     var idx: Int = idx          // index
     var item: String = item     // 出費のアイテム

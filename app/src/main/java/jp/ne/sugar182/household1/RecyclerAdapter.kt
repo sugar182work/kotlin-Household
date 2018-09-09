@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import jp.ne.sugar182.household1.dto.PayData
 import kotlinx.android.synthetic.main.list_item.view.*
 
-// 自動生成されたまま TODO
+// ほぼ自動生成されたまま TODO
 class RecyclerAdapter(private val context: Context,
                       private val itemClickListener: RecyclerViewHolder.ItemClickListener,
                       private val itemList:List<PayData>) : RecyclerView.Adapter<RecyclerViewHolder>() {
