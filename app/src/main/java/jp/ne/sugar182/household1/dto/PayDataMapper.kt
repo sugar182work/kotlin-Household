@@ -8,7 +8,7 @@ import com.fasterxml.jackson.module.kotlin.readValue
 
 // GsonでのJSONとオブジェクトのマッピングはkotlin DataClassに使えなかった？TODO 使えるのか再度確認
 // あまりサードパーティライブラリは好きではないがjackson使用
-// もう一つDataオブジェクトのtoStringで取得した文字列から、Dataオブジェクトを生成するものもみつからなかった
+// もう一つ、DataオブジェクトのtoStringで取得した文字列から、Dataオブジェクトを逆生成するものもみつからなかった
 class PayDataMapper {
 
     fun createPayData(data :String): PayData {
@@ -17,7 +17,7 @@ class PayDataMapper {
         try {
             val payData = mapper.readValue<PayData>(data)
             // 本当に中身が入っているのか
-            Log.d("JsonSiriaraizeData", "payData:${payData.idx}:${payData.item}:${payData.payDate}:${payData.pay}")
+            Log.d("JsonDeSiriaraizeData", "payData:${payData.idx}:${payData.item}:${payData.payDate}:${payData.pay}")
             return payData
 
         } catch(e: Exception) {

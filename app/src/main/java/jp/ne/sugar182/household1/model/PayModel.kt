@@ -66,14 +66,14 @@ class PayModel(context: Context) {
 
     // プライベートなfunを実装
     private fun getNewIndex(): Int {
-        maxIdx++
-        return maxIdx
+        this.maxIdx++
+        return this.maxIdx
     }
 
 
     // Null非許容に変えたい
     fun getMonthData(month : String): MutableList<PayData>? {
-        return allMonthData[month]
+        return this.allMonthData[month]
     }
 
     //月の合計取得
