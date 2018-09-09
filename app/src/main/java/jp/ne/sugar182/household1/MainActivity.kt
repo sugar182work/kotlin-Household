@@ -2,6 +2,7 @@ package jp.ne.sugar182.household1
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
@@ -9,6 +10,7 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.Menu
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
@@ -16,6 +18,8 @@ import jp.ne.sugar182.household1.dto.PayData
 import jp.ne.sugar182.household1.model.ItemModel
 import jp.ne.sugar182.household1.model.PayModel
 import jp.ne.sugar182.household1.util.DateUtilEx
+import android.content.pm.ActivityInfo
+
 
 // コトリン学習１作目
 // アーキテクチャーパターンとか採用せずにぐりぐりと実装　View層肥大しててすみません
@@ -23,10 +27,15 @@ import jp.ne.sugar182.household1.util.DateUtilEx
 // ・内部ストレージの読み書き
 // ・その他文法、癖の確認
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
-
+    var inputMethodManager: InputMethodManager? = null
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        // ポートレートに固定
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+        // キーボード制御用
+        inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
         // 日付の初期値設定
         dateText.text = DateUtilEx().getNowString()
@@ -46,7 +55,6 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         // データモデルを作成TODO ここじゃないかな
         val payModel = PayModel(this)
 
-
         //ボタン押下で情報登録
         //val saveButton = findViewById<Button>(R.id.saveButton);
         saveButton.setOnClickListener {
@@ -63,6 +71,11 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
                 itemModel.addItem(payData.item)
                 // Payデータに書き込み
                 payModel.addData(payData)
+
+                AlertDialog.Builder(this)
+                        .setTitle("登録しました")
+                        .setPositiveButton("ok"){ dialog, which ->
+                        }.show()
             } else {
                 checkError()
             }
@@ -104,7 +117,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         if (payData.pay <= 0) {
             Log.d("Long試験", "0以下")
         } else {
-            Log.d("Long試験", "安心")
+            Log.d("Long試験", "捉え方どうなんだろう")
         }
         return !(payData.item == "" || payData.pay <= 0 || payData.payDate == "")
     }
@@ -119,6 +132,8 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
 
     // カレンダーダイアログの表示
     fun showDatePickerDialog(v: View) {
+        inputMethodManager!!.hideSoftInputFromWindow(v.getWindowToken(),0);
+
         val newFragment = DatePick()
         newFragment.show(supportFragmentManager, "datePicker")
 
@@ -137,10 +152,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
         // getMenuItem可ItemId直参照かで悩む　正解は不明
         when (item.itemId) {
             (R.id.summary) -> {
-                // インテント作って別画面へ
-                // 遷移先のActivityを指定して、Intentを作成する
                 val intent = Intent(application, SecondActivity::class.java)
-                // 遷移先のアクティビティを起動させる
                 startActivity(intent)
             }
             (R.id.finish ) -> {

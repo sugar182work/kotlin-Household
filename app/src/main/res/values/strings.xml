@@ -5,7 +5,7 @@
     <string name="pay_value">支出額</string>
     <string name="pay_date">日付</string>
     <string name="open_details">日付選択</string>
-    <string name="date_placeholder">日付を設定</string>
+    <string name="date_placeholder">日付を設定：</string>
     <string name="no_date">No Data</string>
     <string name="pick_date">Pick Date</string>
     <string name="file_name">data.txt</string>
@@ -13,6 +13,9 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reason2">使っちゃった理由</string>
+    <string name="paylit">支出額</string>
+    <string name="reason3">理由を簡潔に記載</string>
 
     <string-array name="keys">
         <item>item1</item>

@@ -24,19 +24,20 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:gravity="center_horizontal"
         android:orientation="horizontal">
 
         <Button
             android:id="@+id/preButton"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="202dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="＜＜" />
 
         <Button
             android:id="@+id/nextButton"
             style="@style/Widget.AppCompat.Button.Borderless.Colored"
-            android:layout_width="202dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="＞＞" />
     </LinearLayout>

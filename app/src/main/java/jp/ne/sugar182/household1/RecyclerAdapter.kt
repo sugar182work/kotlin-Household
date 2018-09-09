@@ -5,9 +5,8 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import jp.ne.sugar182.household1.dto.PayData
-import kotlinx.android.synthetic.main.list_item.view.*
 
-// ほぼ自動生成されたまま TODO
+// ほぼ自動生成されたまま
 class RecyclerAdapter(private val context: Context,
                       private val itemClickListener: RecyclerViewHolder.ItemClickListener,
                       private val itemList:List<PayData>) : RecyclerView.Adapter<RecyclerViewHolder>() {

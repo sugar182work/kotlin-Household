@@ -13,7 +13,6 @@ class ItemModel(context: Context) {
     val keys = context.resources.getStringArray(R.array.keys).toMutableList()
     val items = mutableMapOf<String, String>()
 
-
     init {
         for (key in keys) {
             var ret = spu.get(key)

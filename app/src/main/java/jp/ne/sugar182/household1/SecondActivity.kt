@@ -1,5 +1,6 @@
 package jp.ne.sugar182.household1
 
+import android.content.pm.ActivityInfo
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
@@ -19,16 +20,20 @@ class SecondActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
 
-        requestedOrientation = SCREEN_ORIENTATION_PORTRAIT
+        // ポートレートに固定
+        this.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
+
         // アクションバーに前画面に戻る機能をつける
         val actionbar = supportActionBar
         actionbar!!.setDisplayHomeAsUpEnabled(true)
 
+        // 画面表示用の情報生成
         payModel = PayModel(this)
         month = DateUtilEx().getNowMonthString()
 
         val monthData = payModel.getMonthData(month)
 
+        // リサイクルアダプター生成
         mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
         mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 

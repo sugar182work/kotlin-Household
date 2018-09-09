@@ -19,7 +19,7 @@ class RecyclerViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val itemImageView: ImageView = view.findViewById(R.id.itemImageView)
 
     init {
-        // layoutの初期設定するときはココ
+
     }
 
 }

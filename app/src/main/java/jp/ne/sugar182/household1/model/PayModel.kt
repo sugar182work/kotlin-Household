@@ -9,7 +9,7 @@ import jp.ne.sugar182.household1.dto.PayDataMapper
 // モデルとしてみたけど View（Activity）に情報を返すかは未定
 // MVPモデルぽくなるのかな？
 // ごりっとデータ操作を実装する。
-// アプリケーションコンテキストにする？サブでも生成する
+// アプリケーションコンテキストにする？サブ画面でも生成する
 class PayModel(context: Context) {
 
     // まず、１件のデータを作成
@@ -17,7 +17,7 @@ class PayModel(context: Context) {
     // 月毎のマップ　MAP(月,List)化
 
     private val fileName = "HouseholdData.dat"
-    private val innnerStorage = InnerStorage(fileName, context)
+    private val innerStorage = InnerStorage(fileName, context)
 
     private var maxIdx: Int = 0;
     private val payDatas = arrayListOf<PayData>()
@@ -25,10 +25,10 @@ class PayModel(context: Context) {
 
     init {
         //最初に全データを読み込む
-        val datas = innnerStorage.readFile()
+        val datas = innerStorage.readFile()
 
         for (data in datas) {
-            Log.d("innnerStorageData", data)
+            Log.d("innerStorageData", data)
             val payData = PayDataMapper().createPayData(data)
             val month = payData.payDate.substring(0, 7)
             Log.d("month", payData.payDate.substring(0, 7))
@@ -40,13 +40,13 @@ class PayModel(context: Context) {
         }
     }
 
-    fun setMonthData(payData: PayData) {
+    private fun setMonthData(payData: PayData) {
         val month = payData.payDate.substring(0, 7)
         if (allMonthData.containsKey(month)) {
-            allMonthData.get(month)!!.add(payData)
+            allMonthData[month]!!.add(payData)
         } else {
             val payList: MutableList<PayData> = mutableListOf(payData)
-            allMonthData.put(month, payList)
+            allMonthData[month] = payList
         }
     }
 
@@ -57,7 +57,7 @@ class PayModel(context: Context) {
         payData.idx = getNewIndex()
         payDatas.add(payData)
 
-        innnerStorage.saveFile(PayDataMapper().createJsonString(payData))
+        innerStorage.saveFile(PayDataMapper().createJsonString(payData))
     }
 
     fun remove(payData: PayData) {
@@ -73,7 +73,7 @@ class PayModel(context: Context) {
 
     // Null非許容に変えたい
     fun getMonthData(month : String): MutableList<PayData>? {
-        return allMonthData.get(month)
+        return allMonthData[month]
     }
 
     //月の合計取得
