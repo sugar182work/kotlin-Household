@@ -26,8 +26,14 @@ import android.content.pm.ActivityInfo
 // ・シェアードの読み書き
 // ・内部ストレージの読み書き
 // ・その他文法、癖の確認
+// ・いい点の摘出
+// ・悪い点を前向きに解釈
+// ・どうしてこういう言語が必要だったか（Javaの何が悪いの？）を前向きに検証
+// ・ラムダは無名関数を使う機会はなかったので採用見送り。StreamAPIも使えそうだけど、ログ出力が面倒で採用見送り。
+// ・コウカイ（変換できねーよ）関数というJSみたいな関数渡しは、使える機会多そう。可読性もよし。
+// Issues 2回連続クリックを防ぐ方法は何かしら必要
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
-    var inputMethodManager: InputMethodManager? = null
+    private var inputMethodManager: InputMethodManager? = null
     override fun onCreate(savedInstanceState: Bundle?)  {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -142,7 +148,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     // メニューの追加
     override fun onCreateOptionsMenu(menu: Menu): Boolean{
         // 戻りの型の指定し忘れでGoogle先生に１時間質問する
-        getMenuInflater().inflate(R.menu.option, menu);
+        menuInflater.inflate(R.menu.option, menu);
         return true
 
     }

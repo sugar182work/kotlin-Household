@@ -37,7 +37,7 @@ class SecondActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener
         mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
         mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
-        totalTxt.text = payModel.getTotal(month)
+        totalTxt.text = "%,d".format(payModel.getTotal(month))
         monthTxt.text = month
 
         // 前月
@@ -47,7 +47,7 @@ class SecondActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener
             if (monthData != null) {
                 month = pre_month
                 monthTxt.text = month
-                totalTxt.text = payModel.getTotal(month)
+                totalTxt.text = "%,d".format(payModel.getTotal(month))
                 mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
                 mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
             }
@@ -60,7 +60,7 @@ class SecondActivity : AppCompatActivity(), RecyclerViewHolder.ItemClickListener
             if (monthData != null) {
                 month = next_month
                 monthTxt.text = month
-                totalTxt.text = payModel.getTotal(month)
+                totalTxt.text = "%,d".format(payModel.getTotal(month))
                 mainRecyclerView.adapter = RecyclerAdapter(this, this, monthData!!)
                 mainRecyclerView.layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 

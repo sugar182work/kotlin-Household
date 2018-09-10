@@ -29,7 +29,7 @@ class RecyclerAdapter(private val context: Context,
             it.idxTextView.text = itemList.get(position).idx.toString()
             it.dateTextView.text = itemList.get(position).payDate
             it.itemTextView.text = itemList.get(position).item
-            it.payTextView.text = itemList.get(position).pay.toString()
+            it.payTextView.text = "%,d".format(itemList.get(position).pay)
             it.itemImageView.setImageResource(R.mipmap.ic_launcher)
         }
     }
@@ -44,7 +44,7 @@ class RecyclerAdapter(private val context: Context,
         val mView = layoutInflater.inflate(R.layout.list_item, parent, false)
 
         mView.setOnClickListener { view ->
-            mRecyclerView?.let {
+            this.mRecyclerView?.let {
                 itemClickListener.onItemClick(view, it.getChildAdapterPosition(view))
             }
         }

@@ -77,7 +77,7 @@ class PayModel(context: Context) {
     }
 
     //月の合計取得
-    fun getTotal(month : String) : String{
+    fun getTotal(month : String) : Long{
         var sum : Long = 0
         val payDatas = getMonthData(month)
         if (payDatas != null) {
@@ -85,7 +85,7 @@ class PayModel(context: Context) {
                 sum += payData.pay
             }
         }
-        return sum.toString()
+        return sum
     }
 
 
