@@ -8,34 +8,13 @@ import com.fasterxml.jackson.module.kotlin.readValue
 
 // GsonでのJSONとオブジェクトのマッピングはkotlin DataClassに使えなかった？TODO 使えるのか再度確認
 // あまりサードパーティライブラリは好きではないがjackson使用
-// もう一つ、DataオブジェクトのtoStringで取得した文字列から、Dataオブジェクトを逆生成するものもみつからなかった
+// もう一つ、KotlinDataオブジェクトのtoStringで取得した文字列から、Dataオブジェクトを逆生成するものもみつからなかった
+
+//最初はTryで囲っていたが１行に変更してみた。可読性悪いな
 class PayDataMapper {
+    // デシリアライズ
+    fun createPayData(data :String): PayData = jacksonObjectMapper().readValue<PayData>(data)
+    // シリアライズ
+    fun createJsonString(payData: PayData): String = jacksonObjectMapper().writeValueAsString(payData)
 
-    fun createPayData(data :String): PayData {
-        val mapper = jacksonObjectMapper()
-
-        try {
-            val payData = mapper.readValue<PayData>(data)
-            // 本当に中身が入っているのか
-            Log.d("JsonDeSiriaraizeData", "payData:${payData.idx}:${payData.item}:${payData.payDate}:${payData.pay}")
-            return payData
-
-        } catch(e: Exception) {
-            Log.d("Exception", e.stackTrace.toString())
-        }
-        return PayData()
-    }
-
-    fun createJsonString(payData: PayData): String {
-        val mapper = jacksonObjectMapper()
-        try {
-            val jsonString = mapper.writeValueAsString(payData)
-            Log.d("JsonData", jsonString)
-            return jsonString
-
-        } catch(e: Exception) {
-            Log.d("Exception", e.stackTrace.toString())
-            return ""
-        }
-    }
 }

@@ -5,7 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import java.io.IOException
 
-class InnerStorage(val fileName: String, val context: Context) {
+class InnerStorage(private val fileName: String, private val context: Context) {
 
     // 内部ストレージへの書き込み
     fun saveFile(saveData: String) {

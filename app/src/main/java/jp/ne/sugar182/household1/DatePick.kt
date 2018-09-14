@@ -7,8 +7,7 @@ import java.util.Calendar
 
 // デートピッカーjavaをそのままコトリン化
 class DatePick : DialogFragment(), DatePickerDialog.OnDateSetListener {
-
-
+    // TODO スレッドセーフ意識していない
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val c = Calendar.getInstance()
         val year = c.get(Calendar.YEAR)

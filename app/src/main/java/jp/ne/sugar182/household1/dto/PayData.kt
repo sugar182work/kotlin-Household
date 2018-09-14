@@ -2,6 +2,7 @@ package jp.ne.sugar182.household1.dto
 
 // 1行で書けるので見直し
 /*
+// SQLLite化も見越してindexをつけておく
 class PayData(idx: Int,item: String, pay: Long, payDate: String) {
     // プロパティ
     var idx: Int = idx          // index

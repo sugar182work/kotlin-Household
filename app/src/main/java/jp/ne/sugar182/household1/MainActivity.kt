@@ -31,7 +31,7 @@ import android.content.pm.ActivityInfo
 // ・どうしてこういう言語が必要だったか（Javaの何が悪いの？）を前向きに検証
 // ・ラムダは無名関数を使う機会はなかったので採用見送り。StreamAPIも使えそうだけど、ログ出力が面倒で採用見送り。
 // ・コウカイ（変換できねーよ）関数というJSみたいな関数渡しは、使える機会多そう。可読性もよし。
-// Issues 2回連続クリックを防ぐ方法は何かしら必要
+// Issues 2回連続クリックを防ぐ方法は何かしら必要 フラグじゃないスマートな方法ないかな
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener{
     private var inputMethodManager: InputMethodManager? = null
     override fun onCreate(savedInstanceState: Bundle?)  {
