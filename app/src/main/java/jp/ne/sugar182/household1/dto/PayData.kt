@@ -16,4 +16,9 @@ class PayData(idx: Int,item: String, pay: Long, payDate: String) {
 }
 */
 // 見直し後　洗練されたロンボクさんですなぁ
-data class PayData(var idx: Int = 0, val payDate: String = "", val item: String = "", val pay: Long = 0)
+data class PayData(
+        var idx: Int = 0,
+        val payDate: String = "",
+        val item: String = "",
+        val pay: Long = 0
+)

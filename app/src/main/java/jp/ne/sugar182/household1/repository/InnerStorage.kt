@@ -17,14 +17,12 @@ class InnerStorage(private val fileName: String, private val context: Context) {
         */
 
         // java風に書いてみる
-        try {
-            val fileOutputStream = context.openFileOutput(fileName, Context.MODE_APPEND)
-            fileOutputStream.write(saveData.toByteArray())
-            fileOutputStream.write("\n".toByteArray())
-            fileOutputStream.close()
-        } catch (e: IOException) {
-            Log.d("IOException", e.stackTrace.toString())
-        }
+
+        val fileOutputStream = context.openFileOutput(fileName, Context.MODE_APPEND)
+        fileOutputStream.write(saveData.toByteArray())
+        fileOutputStream.write("\n".toByteArray())
+        fileOutputStream.close()
+
     }
     // 内部ストレージからの読み込み contextを使用してみる
     fun readFile(): ArrayList<String> {

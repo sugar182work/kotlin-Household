@@ -21,5 +21,4 @@ class SharedPreferencesUtil(fileName: String, context: Context) {
         return value
 
     }
-
 }
