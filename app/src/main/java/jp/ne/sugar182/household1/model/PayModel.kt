@@ -29,7 +29,7 @@ class PayModel(context: Context) {
 
         for (data in datas) {
             Log.d("innerStorageData", data)
-            val payData = PayDataMapper().createPayData(data)
+            val payData = PayDataMapper().jsonToPayData(data)
             val month = payData.payDate.substring(0, 7)
             Log.d("month", payData.payDate.substring(0, 7))
 
@@ -57,7 +57,7 @@ class PayModel(context: Context) {
         payData.idx = getNewIndex()
         payDatas.add(payData)
 
-        innerStorage.saveFile(PayDataMapper().createJsonString(payData))
+        innerStorage.saveFile(PayDataMapper().payDataToJson(payData))
     }
 
     fun remove(payData: PayData) {

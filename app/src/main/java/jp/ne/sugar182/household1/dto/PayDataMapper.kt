@@ -13,8 +13,8 @@ import com.fasterxml.jackson.module.kotlin.readValue
 //最初はTryで囲っていたが１行に変更してみた。可読性悪いな
 class PayDataMapper {
     // デシリアライズ
-    fun createPayData(data :String): PayData = jacksonObjectMapper().readValue<PayData>(data)
+    fun jsonToPayData(data :String): PayData = jacksonObjectMapper().readValue<PayData>(data)
     // シリアライズ
-    fun createJsonString(payData: PayData): String = jacksonObjectMapper().writeValueAsString(payData)
+    fun payDataToJson(payData: PayData): String = jacksonObjectMapper().writeValueAsString(payData)
 
 }
