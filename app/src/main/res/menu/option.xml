@@ -6,6 +6,6 @@
         />
     <item
         android:id="@+id/finish"
-        android:title="終了"
+        android:title="終了   "
         />
 </menu>
