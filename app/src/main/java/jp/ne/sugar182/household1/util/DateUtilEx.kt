@@ -4,6 +4,7 @@ import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
+// static化したい
 class DateUtilEx {
 
     // 現在時刻を YYYY/MM/DD形式で返す
@@ -38,9 +39,11 @@ class DateUtilEx {
         var m = month.substring(5, 7).toInt()
         Log.d("m", m.toString())
         if (m - 1 < 1) {
-            y = y -1
+            y -= 1
             m = 12
-        } else {m = m - 1}
+        } else {
+            m -= 1
+        }
         Log.d("month",String.format("%04d", y) + "/" + String.format("%02d", m))
         return String.format("%04d", y) + "/" + String.format("%02d", m)
     }

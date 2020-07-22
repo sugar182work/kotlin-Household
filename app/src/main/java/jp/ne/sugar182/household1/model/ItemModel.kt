@@ -9,9 +9,9 @@ import jp.ne.sugar182.household1.repository.SharedPreferencesUtil
 class ItemModel(context: Context) {
     val context = context
     //アイテムリストのコントロールをするモデル層
-    val spu = SharedPreferencesUtil("item_preferences", context)
-    val keys = context.resources.getStringArray(R.array.keys).toMutableList()
-    val items = mutableMapOf<String, String>()
+    private val spu = SharedPreferencesUtil("item_preferences", context)
+    private val keys = context.resources.getStringArray(R.array.keys).toMutableList()
+    private val items = mutableMapOf<String, String>()
 
     init {
         for (key in keys) {
@@ -32,8 +32,8 @@ class ItemModel(context: Context) {
             return
         }
         for (key in keys) {
-            if (items.get(key) == "") {
-                items.put(key, item)
+            if (items[key] == "") {
+                items[key] = item
                 spu.save(key, item)
                 return
             }

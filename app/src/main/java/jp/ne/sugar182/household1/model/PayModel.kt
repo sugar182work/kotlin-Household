@@ -20,7 +20,7 @@ class PayModel(context: Context) {
     private val innerStorage = InnerStorage(fileName, context)
 
     private var maxIdx: Int = 0;
-    private val payDatas = arrayListOf<PayData>()
+    private val payData = arrayListOf<PayData>()
     private val allMonthData = mutableMapOf<String, MutableList<PayData>>()
 
     init {
@@ -55,13 +55,13 @@ class PayModel(context: Context) {
     fun addData(payData: PayData) {
         // インデックスを生成して書き込み
         payData.idx = getNewIndex()
-        payDatas.add(payData)
+        this.payData.add(payData)
 
         innerStorage.saveFile(PayDataMapper().payDataToJson(payData))
     }
 
     fun remove(payData: PayData) {
-        payDatas.remove(payData)
+        this.payData.remove(payData)
     }
 
     // プライベートなfun
