@@ -1,7 +1,6 @@
 package jp.ne.sugar182.household1.repository
 
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.util.Log
 import java.io.IOException
 

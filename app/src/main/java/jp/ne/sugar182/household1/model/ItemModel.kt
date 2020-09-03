@@ -16,9 +16,7 @@ class ItemModel(context: Context) {
     init {
         for (key in keys) {
             var ret = spu.get(key)
-            Log.d("Shared$key", ret)
-            items.put(key, ret)
-            //reset()
+             items[key] = ret
         }
     }
     fun reset() {

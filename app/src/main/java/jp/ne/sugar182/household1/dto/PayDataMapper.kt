@@ -1,8 +1,5 @@
 package jp.ne.sugar182.household1.dto
 
-
-import android.util.Log
-import com.google.gson.Gson
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 
