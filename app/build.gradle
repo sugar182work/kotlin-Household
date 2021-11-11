@@ -49,7 +49,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion 30
     defaultConfig {
         applicationId "jp.todate.kotlinrecyclerviewsample"
         minSdkVersion 19
