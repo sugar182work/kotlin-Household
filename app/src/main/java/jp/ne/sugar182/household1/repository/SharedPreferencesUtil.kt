@@ -16,9 +16,11 @@ class SharedPreferencesUtil(fileName: String, context: Context) {
     }
 
     // 読み込み
-    fun get(key: String): String {
+    fun get(key: String): String? {
         val value = shardPreferences.getString(key, "")
-        Log.i("shareable-$key" ,value)
+        if (value != null) {
+            Log.i("shareable-$key" ,value)
+        }
         return value
 
     }

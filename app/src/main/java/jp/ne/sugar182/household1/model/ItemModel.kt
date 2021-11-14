@@ -11,12 +11,12 @@ class ItemModel(context: Context) {
     //アイテムリストのコントロールをするモデル層
     private val spu = SharedPreferencesUtil("item_preferences", context)
     private val keys = context.resources.getStringArray(R.array.keys).toMutableList()
-    private val items = mutableMapOf<String, String>()
+    private val items = mutableMapOf<String, String?>()
 
     init {
         for (key in keys) {
             var ret = spu.get(key)
-             items[key] = ret
+             this.items[key] = ret
         }
     }
     fun reset() {
@@ -39,7 +39,7 @@ class ItemModel(context: Context) {
         }
     }
 
-    fun getAutCompleteList(): List<String> {
+    fun getAutCompleteList(): List<String?> {
         return items.values.toList()
     }
 }
